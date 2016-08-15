@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row row-content" ng-controller="ResultListController">
+        <div class="col-xs-12" ng-if="!showResults">
+            <h3>{{message}}</h3>
+        </div>
+        <div class="col-xs-12" ng-if="showResults">
+            <div class="tab-content">
+                <ul class="media-list tab-pane fade in active">
+                    <li class="media" ng-repeat="result in results.results">
+                        <div class="media-body" ng-if="result.media_type=='person'">
+                            <h2 class="media-heading">{{result.name}}</h2>
+                            <span class="label label-danger">Person</span>
+                        </div>
+                        <div class="media-body" ng-if="result.media_type=='movie'">
+                            <h2 class="media-heading">{{result.name}}</h2>
+                            <span class="label label-danger">Person</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

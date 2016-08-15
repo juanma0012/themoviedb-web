@@ -1,0 +1,21 @@
+{
+  "name": "themoviedb-web",
+  "version": "1.0.0",
+  "description": "Website for search movies.",
+  "main": "index.html",
+  "authors": [
+    "Juan Manuel Sanchez Mejia"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "angular-ui-router": "^0.3.1",
+    "angular-resource": "^1.5.8"
+  }
+}
