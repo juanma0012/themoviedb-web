@@ -43,14 +43,14 @@
                 </div>
                 <div ng-if="showMovies">
                     <h2>Movies</h2>
-                    <div  class="col-xs-6 col-md-2 col-sm-3" ng-repeat="movie in movies.results" style="height:140px;">
-                        <a ui-sref="app.movie({id: movie.id})" class="list-group-item center-block">
+                    <div  class="col-xs-6 col-md-3 col-sm-4" ng-repeat="movie in movies.results" style="height:180px;">
+                        <a ui-sref="app.movie({id: movie.id})" class="list-group-item center-block" style="height:160px;">
                             <div class="center-block">
-                                <small>{{movie.title}}</small>
+                                <img ng-src="https://image.tmdb.org/t/p/w250_and_h141_bestv2/{{movie.poster_path}}" class="img-thumbnail" ng-if="movie.poster_path">
+                                <img  ng-src="images/movie.png" class="img-thumbnail" ng-if="!movie.poster_path" width="45px" height="67px">
                             </div>
                             <div class="center-block">
-                                <img ng-src="https://image.tmdb.org/t/p/w45_and_h67_bestv2/{{movie.poster_path}}" class="img-thumbnail" ng-if="movie.poster_path">
-                                <img  ng-src="images/movie.png" class="img-thumbnail" ng-if="!movie.poster_path" width="45px" height="67px">
+                                <small>{{movie.title}}</small>
                             </div>
                         </a>
                     </div>
