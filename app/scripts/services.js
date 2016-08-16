@@ -11,5 +11,8 @@ angular.module('themoviedbApp')
         }; 
         this.getPerson = function (person_id ) {
             return $http.get(baseURL+"person/"+person_id);
+        };  
+        this.getMoviesByActor = function (actor_id,page ) {
+            return $http.get(baseURL+"actor/"+actor_id+"/movies/page/"+page);
         };             
     }]);

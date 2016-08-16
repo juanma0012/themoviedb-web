@@ -74,6 +74,23 @@ angular.module('themoviedbApp')
                 }
             );      
     }])
+    .controller('MoviesController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
+        console.log("I'm in MoviesController");
+        $scope.movies = {};
+        $scope.showMovies = false;
+        $scope.message ="Loading ...";
+        searchFactory.getMoviesByActor(parseInt($scope.person.id))
+            .then(
+                function(response){
+                    $scope.movies = response.data;
+                    console.log(response.data);
+                    $scope.showMovies=true;
+                },
+                function(response) {
+                    $scope.message = "Error: "+response.status + " " + response.statusText;
+                }
+            );      
+    }])
     .controller('IndexController', ['$scope', 'searchFactory', function($scope, searchFactory) {
         
         $scope.showResults = false;
