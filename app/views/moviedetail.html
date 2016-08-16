@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row" ng-controller="MovieController" >
+        <div class="col-xs-12" ng-if="!showMovie">
+            <h3>{{message}}</h3>
+        </div>
+        <div class="col-xs-12" ng-if="showMovie">
+            <button class="btn btn-xs btn-primary pull-right" type="button" ui-sref="app.menu">
+                Back to Menu
+            </button>
+            <div class="media-left media-middle">
+                <a href="#">
+                <img class="media-object img-thumbnail"
+                 ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{movie.poster_path}}">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading">{{movie.title}}
+                 <span class="label label-danger">{{movie.label}}</span>
+                 <span class="badge">{{movie.price | currency}}</span></h2>
+                <p>{{movie.description}}</p>
+            </div>
+        </div>
+      
+    </div>
+
+</div>

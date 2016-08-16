@@ -1,38 +1,53 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<header  ng-controller="HeaderController" class="fixed">
     <div class="container">
-       <div id="navbar" class="navbar-collapse collapse">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
         </div>
-    </div>
-</nav>         
-           
-<header class="jumbotron">
-
-    <!-- Main component for a primary marketing message or call to action -->
-
-    <div class="container">
-        <div class="row row-header">
-            <div class="col-xs-12 col-sm-8">
-                <h1>Ristorante con Fusion</h1>
-                <p style="padding:40px;"></p>
-                <p>We take inspiration from the World's best cuisines, and create
-                 a unique fusion experience. Our lipsmacking creations will 
-                 tickle your culinary senses!</p>
-            </div>
-            <div class="col-xs-12 col-sm-2">
-            <p style="padding:20px;"></p>
-            <img src="./images/logo.png" class="img-responsive">
-            </div>
-            <div class="col-xs-12 col-sm-2">
+        <div ng-if="!showResults">
+            <h3>{{message}}</h3>
+        </div>
+        <div class="content-scroll" ng-if="showResults">
+            <div class="list-group white-background">
+                <a ui-sref="app.{{result.media_type}}({id: result.id})" class="list-group-item" ng-repeat="result in results.results | filter:validResult" ng-click="cleanText()">
+                    <div class="row" ng-if="result.media_type=='person'">
+                        <div class="col-xs-4 col-md-2">
+                            <img ng-src="https://image.tmdb.org/t/p/w45_and_h67_bestv2/{{result.profile_path}}" class="img-circle" ng-if="result.profile_path">
+                            <img  ng-src="images/person.png" class="img-circle" ng-if="!result.profile_path" width="45px" height="67px">
+                        </div>
+                        <div class="col-xs-8 col-md-10">
+                            {{result.name}}
+                            <span class="label label-primary">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                Person
+                            </span>
+                        </div>
+                    </div>
+                    <div ng-if="result.media_type=='movie'" class="row">
+                        <div class="col-xs-4 col-md-2">
+                            <img ng-src="https://image.tmdb.org/t/p/w45_and_h67_bestv2/{{result.poster_path}}" class="img-thumbnail" ng-if="result.poster_path">
+                            <img  ng-src="images/movie.png" class="img-thumbnail" ng-if="!result.poster_path" width="45px" height="67px">
+                        </div>
+                        <div class="col-xs-8 col-md-10">
+                            {{result.title}}
+                            <span class="label label-info">
+                                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                Movie
+                            </span>
+                            <span class="label label-warning" ng-if="result.vote_average">
+                            <br>
+                                {{result.vote_average}}
+                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                            </span>
+                            <br>
+                            <span class="label label-success">
+                                {{result.release_date|date:'yyyy'}}
+                            </span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
