@@ -6,12 +6,9 @@
                 <button class="btn btn-default" type="button">Go!</button>
             </span>
         </div>
-        <div ng-if="!showResults">
-            <h3>{{message}}</h3>
-        </div>
         <div class="content-scroll" ng-if="showResults">
             <div class="list-group white-background">
-                <a ui-sref="app.{{result.media_type}}({id: result.id})" class="list-group-item" ng-repeat="result in results.results | filter:validResult" ng-click="cleanText()">
+                <a ui-sref="app.{{result.media_type}}({id: result.id})" class="list-group-item" ng-repeat="result in results.results | filter:validResult |orderBy:'media_type':true | orderBy:'release_date':true" ng-click="cleanText()">
                     <div class="row" ng-if="result.media_type=='person'">
                         <div class="col-xs-4 col-md-2">
                             <img ng-src="https://image.tmdb.org/t/p/w45_and_h67_bestv2/{{result.profile_path}}" class="img-circle" ng-if="result.profile_path">
@@ -41,8 +38,8 @@
                                 {{result.vote_average}}
                                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                             </span>
+                            <span class="label label-success" ng-if="result.release_date">
                             <br>
-                            <span class="label label-success">
                                 {{result.release_date|date:'yyyy'}}
                             </span>
                         </div>
@@ -52,3 +49,4 @@
         </div>
     </div>
 </header>
+<div class="header-style"></div>

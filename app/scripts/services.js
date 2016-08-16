@@ -8,5 +8,8 @@ angular.module('themoviedbApp')
         };  
         this.getMovie = function (movie_id ) {
             return $http.get(baseURL+"movie/"+movie_id);
+        }; 
+        this.getPerson = function (person_id ) {
+            return $http.get(baseURL+"person/"+person_id);
         };             
     }]);
