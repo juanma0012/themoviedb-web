@@ -1,25 +1,19 @@
 'use strict';
 
 angular.module('themoviedbApp')
-    .controller('HeaderController', ['$scope', 'searchFactory', function($scope, searchFactory) {
+    .controller('HeaderController', ['$scope', '$timeout', 'searchFactory', function($scope, $timeout, searchFactory) {
         $scope.searchText="";
+        $scope.sentText = "";
+        $scope.canSearch = true;
         $scope.showResults = false;
         $scope.message = "Loading ...";
         $scope.results = [];
+        $scope.page = 1;
 
         $scope.getResults = function(event,page) {
-            
+            $scope.page = page;
             if($scope.searchText!==""&&event.code!=="Escape") {
-                searchFactory.searchAll($scope.searchText,page)
-                    .then(
-                        function(response) {
-                            $scope.results = response.data;
-                            $scope.showResults = true;
-                        },
-                        function(response) {
-                            $scope.message = "Error: "+response.status + " " + response.statusText;
-                        }
-                    );
+                $timeout(function(){$scope.callServer();}, 2000);
             } else {
                 $scope.showResults = false;
                 $scope.results = [];
@@ -27,6 +21,27 @@ angular.module('themoviedbApp')
             }
         };
 
+        $scope.callServer = function () {
+            if($scope.searchText!=$scope.sentText) {
+                if(!$scope.canSearch) {
+                    $timeout(function(){ $scope.callServer();}, 2000);
+                }
+                $scope.canSearch = false;
+                $scope.sentText = $scope.searchText;
+                searchFactory.searchAll($scope.sentText,$scope.page)
+                .then(
+                    function(response) {
+
+                        $scope.results = response.data;
+                        $scope.showResults = true;
+                        $scope.canSearch = true;
+                    },
+                    function(response) {
+                        $scope.message = "Error: "+response.status + " " + response.statusText;
+                    }
+                );
+            }
+        };
         $scope.validResult = function(value,index, array){
             if(value.media_type=='person'||value.media_type=='movie')
                 return true;
@@ -75,7 +90,6 @@ angular.module('themoviedbApp')
             );      
     }])
     .controller('MoviesController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
-        console.log("I'm in MoviesController");
         $scope.movies = {};
         $scope.showMovies = false;
         $scope.message ="Loading ...";
