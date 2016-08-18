@@ -23,7 +23,7 @@ angular.module('themoviedbApp', ['ui.router'])
 
             })
         
-            // route for the dishdetail page
+            // route for the person detail page
             .state('app.person', {
                 url: 'person/:id',
                 views: {
@@ -34,7 +34,7 @@ angular.module('themoviedbApp', ['ui.router'])
                 }
             })
 
-            // route for the dishdetail page
+            // route for the movie detail page
             .state('app.movie', {
                 url: 'movie/:id',
                 views: {
