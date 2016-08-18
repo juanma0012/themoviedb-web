@@ -37,10 +37,10 @@
                         {{genre.name}}
                     </li>  
                 </ul>
-                <strong ng-if="movie.genres">Production companies:</strong>
-                <ul ng-if="movie.genres">
-                    <li ng-repeat="genre in movie.production_companies">
-                        {{genre.name}}
+                <strong ng-if="movie.production_companies">Production companies:</strong>
+                <ul ng-if="movie.production_companies">
+                    <li ng-repeat="company in movie.production_companies">
+                        {{company.name}}
                     </li>  
                 </ul>
             </div>
