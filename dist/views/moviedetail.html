@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container body-content">
     <div class="row" ng-controller="MovieController" >
         <div class="col-xs-12" ng-if="!showMovie">
             <h3>{{message}}</h3>
         </div>
         <div class="col-xs-12" ng-if="showMovie">
             <div class="col-xs-5 col-md-4 thumbnail">
-                <img class="img-thumbnail poster" ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{movie.poster_path}}">
+                <img class="img-thumbnail poster" ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{movie.poster_path}}" ng-if="movie.poster_path">
+                <img class="img-thumbnail poster" ng-src="images/big_movie.png" ng-if="!movie.poster_path">
             </div>
             <div class="col-xs-7 col-md-8">
                 <h2 class="media-heading">

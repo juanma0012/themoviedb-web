@@ -1,55 +1,36 @@
-<div class="container">
+<div class="container body-content">
     <div class="row" ng-controller="PersonController" >
         <div class="col-xs-12" ng-if="!showPerson">
             <h3>{{message}}</h3>
         </div>
         <div class="col-xs-12" ng-if="showPerson">
             <div class="col-xs-5 col-md-4 thumbnail">
-                <img class="img-thumbnail poster" ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{person.profile_path}}">
+                <img class="img-thumbnail poster" ng-src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{person.profile_path}}" ng-if="person.profile_path">
+                <img class="img-thumbnail poster" ng-src="images/big_person.png" ng-if="!person.profile_path">
             </div>
             <div class="col-xs-7 col-md-8">
                 <h2 class="media-heading">
                     {{person.name}} 
                 </h2>
-                <small ng-if="person.tagline">{{person.tagline}} <br></small>
-                <span class="label label-warning" ng-if="person.vote_average">
-                    {{person.vote_average}}
-                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                </span>
-                &nbsp;
-                 <span class="label label-success" ng-if="person.release_date">
-                    {{person.release_date|date:'yyyy'}}
-                </span>
-                <p>
+                <p class="text-justify visible-md visible-sm visible-lg">
                     {{person.biography}}
-                    <span ng-if="person.budget"> <br> <strong>Budget: </strong> {{person.budget|currency}}</span>
                 </p>
-                <ul ng-if="person.genres">
-                    Genres:
-                    <li ng-repeat="genre in person.genres">
-                        {{genre.name}}
-                    </li>  
-                </ul>
-                <ul ng-if="person.genres">
-                    Production companies:
-                    <li ng-repeat="genre in person.production_companies">
-                        {{genre.name}}
-                    </li>  
-                </ul>
             </div>
-            <div class="col-xs-12" ng-controller="MoviesController" >
+            <div class="col-xs-12" ng-controller="ActorMoviesController" >
                 <div ng-if="!showMovies">
                     <h3>{{message}}</h3>
                 </div>
                 <div ng-if="showMovies">
-                    <h2>Movies</h2>
+                    <div class="page-header color-swatch  gray-lighter"> 
+                        <h2>Movies</h2>
+                    </div>
                     <div  class="col-xs-6 col-md-3 col-sm-4" ng-repeat="movie in movies.results" style="height:180px;">
                         <a ui-sref="app.movie({id: movie.id})" class="list-group-item center-block" style="height:160px;">
                             <div class="center-block">
                                 <img ng-src="https://image.tmdb.org/t/p/w250_and_h141_bestv2/{{movie.poster_path}}" class="img-thumbnail" ng-if="movie.poster_path">
-                                <img  ng-src="images/movie.png" class="img-thumbnail" ng-if="!movie.poster_path" width="45px" height="67px">
+                                <img  ng-src="images/medium_movie.png" class="img-thumbnail" ng-if="!movie.poster_path">
                             </div>
-                            <div class="center-block">
+                            <div class="text-center">
                                 <small>{{movie.title}}</small>
                             </div>
                         </a>

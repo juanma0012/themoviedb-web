@@ -14,5 +14,8 @@ angular.module('themoviedbApp')
         };  
         this.getMoviesByActor = function (actor_id,page ) {
             return $http.get(baseURL+"actor/"+actor_id+"/movies/page/"+page);
+        };
+        this.getPopularMovies = function () {
+            return $http.get(baseURL+"movies/popular");
         };             
     }]);

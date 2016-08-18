@@ -1,29 +1,68 @@
+body{
+    font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
+    color: white;
+}
 .fixed{
   position: fixed;
   z-index: 1024;
 }
 .content-scroll{
     position: relative;
-    height: 300px;
+    height: 70vh;
     margin-top: 10px;
     overflow: auto;
 }
 .white-background{
     background-color: white;
 }
-.header-style{
-    height: 50px;
+.white-color{
+    color: white;
+}
+.header-size{
+    height: 130px;
 }
 .poster{
     max-height: 300px;
 }
+.logo{
+    max-height: 60px;
+}
 .thumbnail{
     border: 0;
-
+    background-color: none;
 }
 .normal-text{
     size: 10pt;
 }
 .padding-20{
     padding: 20px;
+}
+.searching-bar{
+    background-color: white;
+    padding: 10px;
+}
+.page-header {
+    
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 10px; 
+}
+.home-header {
+    
+    margin: 0px;
+    padding: 10px; 
+}
+.home-content {
+    background: linear-gradient(to bottom, #00123C, #140B28);
+}
+.body-content{
+    background: linear-gradient(to bottom, #0f2b4a, #174a71);
+}
+.nav-header{
+    background: linear-gradient(to left bottom, #080e26,#257fb3);
+    color: white;
+}
+.nav-content{
+    background: linear-gradient(to  right bottom, #257fb3,#080e26);
+    height: 130px;
 }

@@ -37,6 +37,7 @@ angular.module('themoviedbApp')
                         $scope.canSearch = true;
                     },
                     function(response) {
+                        $scope.canSearch = true;
                         $scope.message = "Error: "+response.status + " " + response.statusText;
                     }
                 );
@@ -89,7 +90,7 @@ angular.module('themoviedbApp')
                 }
             );      
     }])
-    .controller('MoviesController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
+    .controller('ActorMoviesController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
         $scope.movies = {};
         $scope.showMovies = false;
         $scope.message ="Loading ...";
@@ -107,9 +108,20 @@ angular.module('themoviedbApp')
     }])
     .controller('IndexController', ['$scope', 'searchFactory', function($scope, searchFactory) {
         
-        $scope.showResults = false;
-        $scope.message = "Loading ...";
-        $scope.results= [];
+        $scope.movies = {};
+        $scope.showMovies = false;
+        $scope.message ="Loading ...";
+        searchFactory.getPopularMovies()
+            .then(
+                function(response){
+                    $scope.movies = response.data;
+                    console.log(response.data);
+                    $scope.showMovies=true;
+                },
+                function(response) {
+                    $scope.message = "Error: "+response.status + " " + response.statusText;
+                }
+            );   
       
     }])
 ;
