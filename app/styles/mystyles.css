@@ -2,6 +2,9 @@ body{
     font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
     color: white;
 }
+h2{
+    font-size: 28px;
+}
 .fixed{
   position: fixed;
   z-index: 1024;
