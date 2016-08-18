@@ -76,6 +76,7 @@ a.main-text:hover,a.main-text:visited,a.main-text:active,a.main-text:link{
 .poster-image{
     max-height: 200px;
     padding: 5px;
+    text-align: center;
 }
 .poster-link{
     max-height: 180px;
