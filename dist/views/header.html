@@ -4,14 +4,17 @@
             <div class="col-xs-1">
             </div>
             <div class="col-xs-10">
-                <div class="text-center">
-                    <h3>The movie database web</h3>
+                <div class="text-center visible-md visible-sm visible-lg">
+                    <h2>The movie database web</h2>
+                </div>
+                <div class="text-center visible-xs">
+                    <h4>The movie database web</h4>
                 </div>
                 <div class="input-group">
                     <div class="input-group-addon">
                          <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
                     </div>
-                    <input type="text" class="form-control input-lg" placeholder="Search movies for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)" autofocus>
+                    <input type="text" class="form-control input-lg" placeholder="Search movie for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)" autofocus>
                     <div class="input-group-addon">
                          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </div>
