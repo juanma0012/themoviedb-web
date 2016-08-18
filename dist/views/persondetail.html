@@ -6,8 +6,8 @@
                 <li class="active">Actor</a></li>
             </ol>
         </div>
-        <div class="col-xs-12" ng-if="!showPerson">
-            <h3>{{message}}</h3>
+        <div class="col-xs-12 text-center" ng-if="!showPerson">
+            <h3> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> {{message}}</h3>
         </div>
         <div class="col-xs-12" ng-if="showPerson">
             <div class="col-xs-5 col-md-4 thumbnail">
@@ -23,11 +23,11 @@
                 </p>
             </div>
             <div class="col-xs-12" ng-controller="ActorMoviesController" >
-                <div ng-if="!showMovies">
-                    <h3>{{message}}</h3>
+                <div class="col-xs-12 text-center" ng-if="!showMovies">
+                    <h3> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> {{message}}</h3>
                 </div>
                 <div ng-if="showMovies">
-                    <div class="page-header color-swatch  gray-lighter"> 
+                    <div class="page-header"> 
                         <h2>Movies</h2>
                     </div>
                     <div  class="col-xs-6 col-md-3 col-sm-4 poster-image" ng-repeat="movie in movies.results" >

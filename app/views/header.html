@@ -1,31 +1,23 @@
 <div  ng-controller="HeaderController" class="container">
     <nav class="navbar navbar-fixed-top row">
         <div class="col-xs-12 nav-content">
-            <div class="col-xs-1">
+            <div class="text-center visible-md visible-sm visible-lg">
+                <h2><a href="#" class="main-text">The movie database web</a></h2>
             </div>
-            <div class="col-xs-10">
-                <div class="text-center visible-md visible-sm visible-lg">
-                    <h2>The movie database web</h2>
-                </div>
-                <div class="text-center visible-xs">
-                    <h4>The movie database web</h4>
-                </div>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                         <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
-                    </div>
-                    <input type="text" class="form-control input-lg" placeholder="Search movie for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)" autofocus>
-                    <div class="input-group-addon">
-                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </div>
-                </div>
+            <div class="text-center visible-xs">
+                <h4><a href="#" class="main-text">The movie database web</a></h4>
             </div>
-            <div class="col-xs-1">
+            <div class="input-group">
+                <div class="input-group-addon">
+                     <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
+                </div>
+                <input type="text" class="form-control input-lg" placeholder="Search movie for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)" autofocus>
+                <div class="input-group-addon">
+                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </div>
             </div>
         </div>
-
-        <div class="col-xs-1"></div>
-        <div class="content-scroll col-xs-10" ng-if="showResults">
+        <div class="content-scroll col-xs-12" ng-if="showResults">
             <div class="list-group white-background">
                 <a ui-sref="app.{{result.media_type}}({id: result.id})" class="list-group-item" ng-repeat="result in results.results | filter:validResult |orderBy:'media_type':true | orderBy:'release_date':true" ng-click="cleanText()">
                     <div class="row" ng-if="result.media_type=='person'">
@@ -73,7 +65,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-1"></div>
     </nav>
 </div>
 <div class="header-size"></div>

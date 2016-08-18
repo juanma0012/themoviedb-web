@@ -30,10 +30,6 @@ angular.module('themoviedbApp', ['ui.router'])
                     'content@': {
                         templateUrl : 'views/persondetail.html',
                         controller  : 'PersonController'
-                    },
-                    'movies@content': {
-                        templateUrl : 'views/movies.html',
-                        controller  : 'MoviesController'
                     }
                 }
             })

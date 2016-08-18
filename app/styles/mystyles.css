@@ -1,9 +1,15 @@
 body{
-    font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
+    font-family: Georgia,"Times New Roman",Times,serif;
     color: white;
+    height: 100%;
+    background: linear-gradient(to bottom, #164970,#174a71);
 }
 h2{
     margin-top: 5px;
+}
+a.main-text:hover,a.main-text:visited,a.main-text:active,a.main-text:link{
+    color: white;
+    text-decoration: none;
 }
 .content-scroll{
     position: relative;
@@ -59,8 +65,10 @@ h2{
     height: 100px;
 }
 .footer{
-    background: linear-gradient(to left bottom, #803A00,#F26E00);
+    background: linear-gradient(to right, #803A00,#F26E00);
     border-top: 2px solid #FFB273;
+    border-bottom: 2px solid #FFB273;
+    bottom: -67px;
 }
 .container{
     width: 100%;

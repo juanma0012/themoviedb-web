@@ -1,6 +1,9 @@
 <div class="container" ng-controller="IndexController">
     <div class="row">
        	<div class="col-xs-12 body-content">
+       		<div class="col-xs-12 text-center" ng-if="!showMovies">
+	            <h3> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> {{message}}</h3>
+	        </div>
             <div ng-if="showMovies">
                 <div class="page-header text-center white-color"> 
                     <h2>Popular movies</h2>
