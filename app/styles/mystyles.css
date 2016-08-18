@@ -2,12 +2,8 @@ body{
     font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
     color: white;
 }
-h2{
-    font-size: 28px;
-}
-.fixed{
-  position: fixed;
-  z-index: 1024;
+h3{
+    margin-top: 5px;
 }
 .content-scroll{
     position: relative;
@@ -17,12 +13,6 @@ h2{
 }
 .white-background{
     background-color: white;
-}
-.white-color{
-    color: white;
-}
-.header-size{
-    height: 130px;
 }
 .poster{
     max-height: 300px;
@@ -39,10 +29,6 @@ h2{
 }
 .padding-20{
     padding: 20px;
-}
-.searching-bar{
-    background-color: white;
-    padding: 10px;
 }
 .page-header {
     
@@ -63,9 +49,35 @@ h2{
 }
 .nav-header{
     background: linear-gradient(to left bottom, #080e26,#257fb3);
-    color: white;
 }
 .nav-content{
     background: linear-gradient(to  right bottom, #257fb3,#080e26);
-    height: 130px;
+    height: 100px;
+    border-bottom: 2px solid #FFB273;
+}
+.header-size{
+    height: 100px;
+}
+.footer{
+    background: linear-gradient(to left bottom, #803A00,#F26E00);
+    border-top: 2px solid #FFB273;
+}
+.container{
+    width: 100%;
+}
+.poster-image{
+    max-height: 200px;
+    padding: 5px;
+}
+.poster-link{
+    max-height: 180px;
+}
+.home-link{
+    color: inherit; 
+}
+.small-image{
+    max-height: 67px;
+}
+.breadcrumb-padding{
+    padding-top: 10px;
 }

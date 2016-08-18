@@ -1,5 +1,11 @@
 <div class="container body-content">
     <div class="row" ng-controller="MovieController" >
+        <div class="col-xs-12 breadcrumb-padding">
+            <ol class="breadcrumb">
+                <li><a href="/#">Home</a></li>
+                <li class="active">Movie</a></li>
+            </ol>
+        </div>
         <div class="col-xs-12" ng-if="!showMovie">
             <h3>{{message}}</h3>
         </div>
@@ -25,14 +31,14 @@
                     {{movie.overview}}
                     <span ng-if="movie.budget"> <br> <strong>Budget: </strong> {{movie.budget|currency}}</span>
                 </p>
+                <strong ng-if="movie.genres">Genres:</strong>
                 <ul ng-if="movie.genres">
-                    Genres:
                     <li ng-repeat="genre in movie.genres">
                         {{genre.name}}
                     </li>  
                 </ul>
+                <strong ng-if="movie.genres">Production companies:</strong>
                 <ul ng-if="movie.genres">
-                    Production companies:
                     <li ng-repeat="genre in movie.production_companies">
                         {{genre.name}}
                     </li>  

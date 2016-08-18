@@ -4,14 +4,14 @@
             <div class="col-xs-1">
             </div>
             <div class="col-xs-10">
-                <div class="text-center white-color">
-                    <h2>The movie database web</h2>
+                <div class="text-center">
+                    <h3>The movie database web</h3>
                 </div>
                 <div class="input-group">
                     <div class="input-group-addon">
                          <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
                     </div>
-                    <input type="text" class="form-control input-lg" placeholder="Search for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)" autofocus>
+                    <input type="text" class="form-control input-lg" placeholder="Search movies for..." name="searchText" ng-model="searchText" ng-keyup="getResults($event,1)" autofocus>
                     <div class="input-group-addon">
                          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </div>
@@ -39,11 +39,11 @@
                         </div>
                     </div>
                     <div ng-if="result.media_type=='movie'" class="row">
-                        <div class="col-xs-4 col-md-2">
-                            <img ng-src="https://image.tmdb.org/t/p/w45_and_h67_bestv2/{{result.poster_path}}" class="img-thumbnail" ng-if="result.poster_path">
-                            <img  ng-src="images/movie.png" class="img-thumbnail" ng-if="!result.poster_path" >
+                        <div class="col-xs-5 col-md-2">
+                            <img ng-src="https://image.tmdb.org/t/p/w250_and_h141_bestv2/{{result.poster_path}}" class="img-thumbnail small-image" ng-if="result.poster_path">
+                            <img  ng-src="images/medium_movie.png" class="img-thumbnail small-image" ng-if="!result.poster_path" >
                         </div>
-                        <div class="col-xs-6 col-md-8">
+                        <div class="col-xs-7 col-md-8">
                             {{result.title}}
                             <span class="label label-info">
                                 <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
@@ -61,6 +61,13 @@
                         </div>
                     </div>
                 </a>
+                <div class="col-xs-12 white-background" ng-show="results.page!=results.total_pages">
+                    <nav aria-label="...">
+                        <ul class="pager">
+                            <li class="next"><a href="" ng-click="getMoreResults(results.page+1)">More <span aria-hidden="true">&rarr;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
         <div class="col-xs-1"></div>

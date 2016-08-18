@@ -1,5 +1,11 @@
 <div class="container body-content">
     <div class="row" ng-controller="PersonController" >
+        <div class="col-xs-12 breadcrumb-padding">
+            <ol class="breadcrumb">
+                <li><a href="/#">Home</a></li>
+                <li class="active">Actor</a></li>
+            </ol>
+        </div>
         <div class="col-xs-12" ng-if="!showPerson">
             <h3>{{message}}</h3>
         </div>
@@ -24,8 +30,8 @@
                     <div class="page-header color-swatch  gray-lighter"> 
                         <h2>Movies</h2>
                     </div>
-                    <div  class="col-xs-6 col-md-3 col-sm-4" ng-repeat="movie in movies.results" style="height:180px;">
-                        <a ui-sref="app.movie({id: movie.id})" class="list-group-item center-block" style="height:160px;">
+                    <div  class="col-xs-6 col-md-3 col-sm-4 poster-image" ng-repeat="movie in movies.results" >
+                        <a ui-sref="app.movie({id: movie.id})" class="list-group-item center-block poster-link">
                             <div class="center-block">
                                 <img ng-src="https://image.tmdb.org/t/p/w250_and_h141_bestv2/{{movie.poster_path}}" class="img-thumbnail" ng-if="movie.poster_path">
                                 <img  ng-src="images/medium_movie.png" class="img-thumbnail" ng-if="!movie.poster_path">
@@ -34,6 +40,13 @@
                                 <small>{{movie.title}}</small>
                             </div>
                         </a>
+                    </div>
+                    <div class="col-xs-12" ng-show="movies.page!=movies.total_pages">
+                        <nav aria-label="...">
+                            <ul class="pager">
+                                <li class="next"><a href="" ng-click="getMoreMovies(movies.page+1)">More <span aria-hidden="true">&rarr;</span></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

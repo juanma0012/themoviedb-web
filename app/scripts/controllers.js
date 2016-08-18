@@ -10,8 +10,7 @@ angular.module('themoviedbApp')
         $scope.results = [];
         $scope.page = 1;
 
-        $scope.getResults = function(event,page) {
-            $scope.page = page;
+        $scope.getResults = function(event) {
             if($scope.searchText!==""&&event.code!=="Escape") {
                 $timeout(function(){$scope.callServer();}, 2000);
             } else {
@@ -28,10 +27,10 @@ angular.module('themoviedbApp')
                 }
                 $scope.canSearch = false;
                 $scope.sentText = $scope.searchText;
-                searchFactory.searchAll($scope.sentText,$scope.page)
+                $scope.page = 1;
+                searchFactory.searchAll($scope.sentText,1)
                 .then(
                     function(response) {
-
                         $scope.results = response.data;
                         $scope.showResults = true;
                         $scope.canSearch = true;
@@ -54,6 +53,19 @@ angular.module('themoviedbApp')
             $scope.showResults = false;
             $scope.results = [];
             $scope.searchText="";
+        };
+        $scope.getMoreResults = function(page) {
+            $scope.page = page;
+            searchFactory.searchAll($scope.sentText,$scope.page)
+                .then(
+                    function(response) {
+                        $scope.results = response.data;
+                        $scope.showResults = true;
+                    },
+                    function(response) {
+                        $scope.message = "Error: "+response.status + " " + response.statusText;
+                    }
+                );
         };
     }])
     .controller('MovieController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
@@ -94,17 +106,20 @@ angular.module('themoviedbApp')
         $scope.movies = {};
         $scope.showMovies = false;
         $scope.message ="Loading ...";
-        searchFactory.getMoviesByActor(parseInt($scope.person.id))
-            .then(
-                function(response){
-                    $scope.movies = response.data;
-                    console.log(response.data);
-                    $scope.showMovies=true;
-                },
-                function(response) {
-                    $scope.message = "Error: "+response.status + " " + response.statusText;
-                }
-            );      
+        $scope.getMoreMovies = function(page) {
+            searchFactory.getMoviesByActor(parseInt($scope.person.id),page)
+                .then(
+                    function(response){
+                        $scope.movies = response.data;
+                        console.log(response.data);
+                        $scope.showMovies=true;
+                    },
+                    function(response) {
+                        $scope.message = "Error: "+response.status + " " + response.statusText;
+                    }
+                );   
+        };  
+        $scope.getMoreMovies(1); 
     }])
     .controller('IndexController', ['$scope', 'searchFactory', function($scope, searchFactory) {
         
@@ -115,7 +130,6 @@ angular.module('themoviedbApp')
             .then(
                 function(response){
                     $scope.movies = response.data;
-                    console.log(response.data);
                     $scope.showMovies=true;
                 },
                 function(response) {
