@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('themoviedbApp', ['ui.router'])
+    // The states are declared in this section to show the correct view when in the url change the information.
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
         
@@ -23,7 +24,7 @@ angular.module('themoviedbApp', ['ui.router'])
 
             })
         
-            // route for the person detail page
+            // route for the person details page
             .state('app.person', {
                 url: 'person/:id',
                 views: {
@@ -34,7 +35,7 @@ angular.module('themoviedbApp', ['ui.router'])
                 }
             })
 
-            // route for the movie detail page
+            // route for the movie details page
             .state('app.movie', {
                 url: 'movie/:id',
                 views: {

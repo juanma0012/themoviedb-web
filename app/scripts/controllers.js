@@ -1,7 +1,11 @@
 'use strict';
-
+/*
+    The themoviedbApp module contains all the application's logic. Each controller has dependency injection for objects and services.
+*/
 angular.module('themoviedbApp')
-    .controller('HeaderController', ['$scope', '$timeout', 'searchFactory', function($scope, $timeout, searchFactory) {
+    // HeaderController has variables and functions to search and to list  movies and people through a text wrote in the searching bar.
+    .controller('HeaderController', ['$scope', '$timeout', 'searchingService', function($scope, $timeout, searchingService) {
+        //Variables
         $scope.searchText="";
         $scope.sentText = "";
         $scope.canSearch = true;
@@ -10,6 +14,9 @@ angular.module('themoviedbApp')
         $scope.results = [];
         $scope.page = 1;
 
+        //Functions
+
+        //It's alert to listen each event in the searching bar.
         $scope.getResults = function(event) {
             if($scope.searchText!==""&&event.code!=="Escape") {
                 $timeout(function(){$scope.callServer();}, 2000);
@@ -19,7 +26,7 @@ angular.module('themoviedbApp')
                 $scope.searchText="";
             }
         };
-
+        //It uses the searchingService service to make a request to the server. Also, it use the $timeout object, through dependency injection, to delay the request to the server.
         $scope.callServer = function () {
             if($scope.searchText!=$scope.sentText) {
                 if(!$scope.canSearch) {
@@ -28,7 +35,7 @@ angular.module('themoviedbApp')
                 $scope.canSearch = false;
                 $scope.sentText = $scope.searchText;
                 $scope.page = 1;
-                searchFactory.searchAll($scope.sentText,1)
+                searchingService.searchAll($scope.sentText,1)
                 .then(
                     function(response) {
                         $scope.results = response.data;
@@ -42,21 +49,23 @@ angular.module('themoviedbApp')
                 );
             }
         };
+        //It only accept type either person or movie.
         $scope.validResult = function(value,index, array){
             if(value.media_type=='person'||value.media_type=='movie')
                 return true;
             else
                 return false;
         };
-
+        //It put the variables without information.
         $scope.cleanText = function(value,index, array){
             $scope.showResults = false;
             $scope.results = [];
             $scope.searchText="";
         };
+        //It searchs with the same text, but in the next page of the API response.
         $scope.getMoreResults = function(page) {
             $scope.page = page;
-            searchFactory.searchAll($scope.sentText,$scope.page)
+            searchingService.searchAll($scope.sentText,$scope.page)
                 .then(
                     function(response) {
                         $scope.results = response.data;
@@ -68,16 +77,16 @@ angular.module('themoviedbApp')
                 );
         };
     }])
-    .controller('MovieController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
+    // MovieController requests to the server all the information about a specific movie.
+    .controller('MovieController', ['$scope', '$stateParams','searchingService', function($scope,$stateParams,  searchingService) {
         
         $scope.movie = {};
         $scope.showMovie = false;
         $scope.message="Loading ...";
-        searchFactory.getMovie(parseInt($stateParams.id))
+        searchingService.getMovie(parseInt($stateParams.id))
             .then(
                 function(response){
                     $scope.movie = response.data;
-                    console.log(response.data);
                     $scope.showMovie=true;
                 },
                 function(response) {
@@ -85,16 +94,16 @@ angular.module('themoviedbApp')
                 }
             );      
     }])
-    .controller('PersonController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
+    // PersonController requests to the server all the information about a specific person.
+    .controller('PersonController', ['$scope', '$stateParams','searchingService', function($scope,$stateParams,  searchingService) {
         
         $scope.person = {};
         $scope.showPerson = false;
         $scope.message="Loading ...";
-        searchFactory.getPerson(parseInt($stateParams.id))
+        searchingService.getPerson(parseInt($stateParams.id))
             .then(
                 function(response){
                     $scope.person = response.data;
-                    console.log(response.data);
                     $scope.showPerson=true;
                 },
                 function(response) {
@@ -102,16 +111,16 @@ angular.module('themoviedbApp')
                 }
             );      
     }])
-    .controller('ActorMoviesController', ['$scope', '$stateParams','searchFactory', function($scope,$stateParams,  searchFactory) {
+    // ActorMoviesController requests to the server all the movies for a specific actor. 
+    .controller('ActorMoviesController', ['$scope', '$stateParams','searchingService', function($scope,$stateParams,  searchingService) {
         $scope.movies = {};
         $scope.showMovies = false;
         $scope.message ="Loading ...";
         $scope.getMoreMovies = function(page) {
-            searchFactory.getMoviesByActor(parseInt($scope.person.id),page)
+            searchingService.getMoviesByActor(parseInt($scope.person.id),page)
                 .then(
                     function(response){
                         $scope.movies = response.data;
-                        console.log(response.data);
                         $scope.showMovies=true;
                     },
                     function(response) {
@@ -121,12 +130,13 @@ angular.module('themoviedbApp')
         };  
         $scope.getMoreMovies(1); 
     }])
-    .controller('IndexController', ['$scope', 'searchFactory', function($scope, searchFactory) {
+    //IndexController requests to the server for the popular movies.
+    .controller('IndexController', ['$scope', 'searchingService', function($scope, searchingService) {
         
         $scope.movies = {};
         $scope.showMovies = false;
         $scope.message ="Loading ...";
-        searchFactory.getPopularMovies()
+        searchingService.getPopularMovies()
             .then(
                 function(response){
                     $scope.movies = response.data;
